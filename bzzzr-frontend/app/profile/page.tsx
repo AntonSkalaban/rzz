@@ -1,8 +1,8 @@
-import { StatCard } from "@/components/profile/stat-card"
-import { TransactionHistory } from "@/components/profile/transaction-history"
-import { Button } from "@/components/ui/button"
-import { Wallet, Download, Upload, UserPlus, Copy } from "lucide-react"
-import { TonIcon } from "@/components/icons/ton-icon" // Import TonIcon
+import { StatCard } from "@/components/profile/stat-card";
+import { TransactionHistory } from "@/components/profile/transaction-history";
+import { Button } from "@/components/ui/button";
+import { Wallet, Download, Upload, UserPlus, Copy } from "lucide-react";
+import { TonIcon } from "@/components/icons/ton-icon"; // Import TonIcon
 
 const mockTransactions = [
   {
@@ -42,7 +42,7 @@ const mockTransactions = [
     type: "Покупка",
     itemId: 10267,
   },
-]
+];
 
 export default function ProfilePage() {
   return (
@@ -51,23 +51,44 @@ export default function ProfilePage() {
       <div className="bg-[var(--bg-secondary)] rounded-xl p-4 card-shadow text-center">
         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">Баланс</h2>
         <div className="flex items-center justify-center gap-2 mb-4">
-          <TonIcon width={32} height={32} className="text-[var(--accent-gold)]" /> {/* Adjusted size */}
+          <TonIcon width={32} height={32} className="text-[var(--accent-gold)]" />{" "}
+          {/* Adjusted size */}
           <span className="text-4xl font-bold text-[var(--text-primary)]">1234.5</span>
         </div>
-        <div className="grid grid-cols-5 gap-2 mb-6">
-          <Button variant="secondary" size="icon-lg">
+        <div className="grid grid-cols-5 gap-2 mb-6 place-items-center">
+          <Button
+            variant="secondary"
+            size="icon-lg"
+            className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+          >
             <Wallet className="w-6 h-6 text-[var(--accent-gold)]" />
           </Button>
-          <Button variant="secondary" size="icon-lg">
+          <Button
+            variant="secondary"
+            size="icon-lg"
+            className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+          >
             <Download className="w-6 h-6 text-[var(--accent-gold)]" />
           </Button>
-          <Button variant="secondary" size="icon-lg">
+          <Button
+            variant="secondary"
+            size="icon-lg"
+            className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+          >
             <Upload className="w-6 h-6 text-[var(--accent-gold)]" />
           </Button>
-          <Button variant="secondary" size="icon-lg">
+          <Button
+            variant="secondary"
+            size="icon-lg"
+            className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+          >
             <UserPlus className="w-6 h-6 text-[var(--accent-gold)]" />
           </Button>
-          <Button variant="secondary" size="icon-lg">
+          <Button
+            variant="secondary"
+            size="icon-lg"
+            className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+          >
             <Copy className="w-6 h-6 text-[var(--accent-gold)]" />
           </Button>
         </div>
@@ -110,7 +131,8 @@ export default function ProfilePage() {
 
         <div className="flex items-center justify-between bg-[var(--bg-tertiary)] p-3 rounded-lg mb-4">
           <div className="flex items-center gap-2">
-            <TonIcon width={20} height={20} className="text-[var(--accent-gold)]" /> {/* Adjusted size */}
+            <TonIcon width={20} height={20} className="text-[var(--accent-gold)]" />{" "}
+            {/* Adjusted size */}
             <span className="text-[var(--text-primary)] font-semibold">Cashback 23</span>
             <span className="text-[var(--text-muted)] text-sm">(min withdrawal 1 TON)</span>
           </div>
@@ -123,5 +145,5 @@ export default function ProfilePage() {
       {/* История операций */}
       <TransactionHistory transactions={mockTransactions} />
     </div>
-  )
+  );
 }
