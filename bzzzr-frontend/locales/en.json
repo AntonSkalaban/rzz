@@ -7,7 +7,7 @@
     "cart": "Cart"
   },
   "navigation": {
-    "marketplace": "Marketplace",
+    "marketplace": "Bazar",
     "myItems": "My Items",
     "raffles": "Raffles",
     "trades": "Trade History",
@@ -212,5 +212,8 @@
     "emptyVaultDescription": "To sell an item: Say hello and send it to @bzzzrhub, then set a price and put it up for sale.",
     "noItemsOnSaleTitle": "No items currently on sale",
     "noItemsOnSaleDescription": "You haven't listed any items for sale yet. List your items to earn TON!"
+  },
+  "common": {
+    "searchPlaceholder": "Search"
   }
 }

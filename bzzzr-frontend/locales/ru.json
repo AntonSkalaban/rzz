@@ -207,10 +207,13 @@
   "itemsPage": {
     "notForSale": "Не на продажу",
     "onSale": "В продаже",
-    "searchByCharacteristics": "поиск по характеристикам",
+    "searchByCharacteristics": "Поиск по характеристикам",
     "emptyVaultTitle": "В хранилище нет предметов",
     "emptyVaultDescription": "Чтобы продать предмет: Поздоровайтесь и отправьте его в @bzzzrhub, затем установите цену и выставьте на продажу.",
     "noItemsOnSaleTitle": "Нет предметов в продаже",
     "noItemsOnSaleDescription": "Вы еще не выставили предметы на продажу. Выставляйте свои предметы, чтобы заработать TON!"
+  },
+  "common": {
+    "searchPlaceholder": "Поиск"
   }
 }
