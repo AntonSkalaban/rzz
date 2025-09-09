@@ -61,8 +61,9 @@ export function Header() {
           aria-label={t("header.support")}
         />
         <IconButton
+        style={{width: 'max-content',padding: '0 8px'}}
           icon={
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1" >
               <Globe className="w-5 h-5 text-[var(--accent-gold)]" />
               <span className="text-[var(--text-primary)] text-sm font-medium">{language.toUpperCase()}</span>{" "}
               {/* Добавляем видимый индикатор языка */}
