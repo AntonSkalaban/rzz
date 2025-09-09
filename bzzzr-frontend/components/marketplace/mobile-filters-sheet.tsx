@@ -14,6 +14,7 @@ export function MobileFiltersSheet({ trigger }: MobileFiltersSheetProps) {
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent
         side="bottom" // Изменено на "bottom" для появления снизу
+        style={{borderTop: '0' }}
         className="fixed inset-0 z-50 rounded-xl bg-[var(--bg-secondary)] p-0 // Занимает весь экран, закругленные углы
         data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
         data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-bottom-full // Анимация снизу
