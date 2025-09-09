@@ -1,0 +1,3 @@
+
+.responsive-text { display: inline-block; }
+@media (max-width: 800px) { .responsive-text { display: none !important; } }

@@ -62,6 +62,18 @@ export function WalletBalanceCard({
     }
   };
 
+  const btns = [
+    { id: 1, Component: Download, title: "walletPage.deposit", onClick: handleDeposit },
+    { id: 2, Component: Upload, title: "walletPage.withdraw", onClick: handleWithdraw },
+    { id: 3, Component: UserPlus, title: "walletPage.inviteFriend", onClick: handleInviteFriend },
+    {
+      id: 4,
+      Component: Copy,
+      title: "walletPage.copyReferralLink",
+      onClick: handleCopyReferralLink,
+    },
+  ];
+
   return (
     <div className="bg-[var(--bg-secondary)] rounded-xl p-4 card-shadow text-center">
       <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
@@ -78,7 +90,19 @@ export function WalletBalanceCard({
           </div>
 
           <div className="grid grid-cols-4 gap-2 mb-4 place-items-center">
-            <Button
+            {btns.map(({ id, Component, title, onClick }) => (
+              <Button
+                key={id}
+                variant="secondary"
+                size="icon-lg"
+                onClick={onClick}
+                className="bg-[var(--bg-surface-primary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
+              >
+                <Component className="w-6 h-6 text-[var(--accent-gold)]" />
+                <span className="sr-only">{t(title)}</span>
+              </Button>
+            ))}
+            {/* <Button
               variant="secondary"
               size="icon-lg"
               onClick={handleDeposit}
@@ -86,8 +110,8 @@ export function WalletBalanceCard({
             >
               <Download className="w-6 h-6 text-[var(--accent-gold)]" />
               <span className="sr-only">{t("walletPage.deposit")}</span>
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               variant="secondary"
               size="icon-lg"
               onClick={handleWithdraw}
@@ -95,8 +119,8 @@ export function WalletBalanceCard({
             >
               <Upload className="w-6 h-6 text-[var(--accent-gold)]" />
               <span className="sr-only">{t("walletPage.withdraw")}</span>
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               variant="secondary"
               size="icon-lg"
               onClick={handleInviteFriend}
@@ -104,8 +128,8 @@ export function WalletBalanceCard({
             >
               <UserPlus className="w-6 h-6 text-[var(--accent-gold)]" />
               <span className="sr-only">{t("walletPage.inviteFriend")}</span>
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               variant="secondary"
               size="icon-lg"
               onClick={handleCopyReferralLink}
@@ -113,7 +137,7 @@ export function WalletBalanceCard({
             >
               <Copy className="w-6 h-6 text-[var(--accent-gold)]" />
               <span className="sr-only">{t("walletPage.copyReferralLink")}</span>
-            </Button>
+            </Button> */}
           </div>
 
           <div className="text-xs text-[var(--text-muted)] mb-2">
