@@ -102,42 +102,6 @@ export function WalletBalanceCard({
                 <span className="sr-only">{t(title)}</span>
               </Button>
             ))}
-            {/* <Button
-              variant="secondary"
-              size="icon-lg"
-              onClick={handleDeposit}
-              className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
-            >
-              <Download className="w-6 h-6 text-[var(--accent-gold)]" />
-              <span className="sr-only">{t("walletPage.deposit")}</span>
-            </Button> */}
-            {/* <Button
-              variant="secondary"
-              size="icon-lg"
-              onClick={handleWithdraw}
-              className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
-            >
-              <Upload className="w-6 h-6 text-[var(--accent-gold)]" />
-              <span className="sr-only">{t("walletPage.withdraw")}</span>
-            </Button> */}
-            {/* <Button
-              variant="secondary"
-              size="icon-lg"
-              onClick={handleInviteFriend}
-              className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
-            >
-              <UserPlus className="w-6 h-6 text-[var(--accent-gold)]" />
-              <span className="sr-only">{t("walletPage.inviteFriend")}</span>
-            </Button> */}
-            {/* <Button
-              variant="secondary"
-              size="icon-lg"
-              onClick={handleCopyReferralLink}
-              className="bg-[var(--bg-secondary)] rounded-xl card-shadow transition-all duration-200 hover:card-shadow-hover"
-            >
-              <Copy className="w-6 h-6 text-[var(--accent-gold)]" />
-              <span className="sr-only">{t("walletPage.copyReferralLink")}</span>
-            </Button> */}
           </div>
 
           <div className="text-xs text-[var(--text-muted)] mb-2">
