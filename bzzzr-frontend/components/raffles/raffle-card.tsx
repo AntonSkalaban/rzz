@@ -9,6 +9,7 @@ import type { Raffle } from "@/types/raffle";
 import { TonIcon } from "@/components/icons/ton-icon";
 import { useLanguage } from "@/context/language-context";
 import { formatTimeRemaining } from "@/lib/getDDHHMM";
+import { defaultRaffleImg } from "@/constants/constants";
 
 interface RaffleCardProps {
   raffle: Raffle;
@@ -38,13 +39,13 @@ export function RaffleCard({ raffle, onViewDetails }: RaffleCardProps) {
         "relative bg-[var(--bg-secondary)] rounded-xl p-3 card-shadow",
         "hover:-translate-y-1 hover:card-shadow-hover transition-all duration-200 ease-in-out",
         isEnded && "opacity-70 grayscale",
-        "h-full flex flex-col" // Добавляем эти классы
+        "h-full flex flex-col" 
       )}
     >
       {/* Image and status badge */}
       <div className="relative w-full aspect-[3/4] bg-[var(--bg-tertiary)] rounded-lg overflow-hidden mb-3 flex-shrink-0">
         <Image
-          src={raffle.imageUrl || "/placeholder.svg?height=200&width=150&query=raffle item"}
+          src={raffle.imageUrl || defaultRaffleImg}
           alt={raffle.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -82,7 +83,7 @@ export function RaffleCard({ raffle, onViewDetails }: RaffleCardProps) {
         {/* Entry Cost */}
         <div className="flex items-center justify-between text-[var(--text-secondary)] text-sm mb-2">
           {raffle.costToJoin === 0 ? (
-            <Badge variant="gold" className="text-sm p-0" style={{height: '17.5px'}}>
+            <Badge variant="gold" className="text-sm p-0" style={{ height: "17.5px" }}>
               {t("raffleCard.freeEntry")}
             </Badge>
           ) : (
@@ -108,9 +109,6 @@ export function RaffleCard({ raffle, onViewDetails }: RaffleCardProps) {
             <span>{timeRemaining}</span>
           </div>
         </div>
-
-        {/* Пустое пространство, которое будет растягиваться */}
-        {/* <div className="flex-1"></div> */}
 
         {/* Action Button - теперь прижмется к низу */}
         <Button

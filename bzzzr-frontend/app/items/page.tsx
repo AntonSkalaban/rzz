@@ -100,7 +100,7 @@ export default function ItemsPage() {
               <EmptyState
                 title={t("itemsPage.emptyVaultTitle")}
                 description={t("itemsPage.emptyVaultDescription")}
-                iconSrc="/images/empty-state-icon.png"
+                iconSrc="/images/bzzzr.png"
               />
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mt-4">
@@ -124,7 +124,7 @@ export default function ItemsPage() {
               <EmptyState
                 title={t("itemsPage.noItemsOnSaleTitle")}
                 description={t("itemsPage.noItemsOnSaleDescription")}
-                iconSrc="/images/empty-state-icon.png"
+                iconSrc="/images/no-my-items.png"
               />
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mt-4">
