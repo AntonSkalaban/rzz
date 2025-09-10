@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 import type { VariantProps } from "class-variance-authority"
 import { TonIcon } from "@/components/icons/ton-icon"
 import { useCart } from "@/context/cart-context" // Импортируем useCart
+import { defaultMyItemImg } from "@/constants/constants"
 
 export type Rarity = "common" | "uncommon" | "rare" | "epic" | "legendary" | "mythic"
 
@@ -69,7 +70,7 @@ export function ItemCard({
       {/* Изображение предмета */}
       <div className="relative w-full aspect-[3/4] bg-[var(--bg-tertiary)] rounded-lg overflow-hidden mb-2">
         <Image
-          src={imageUrl || "/placeholder.svg?height=200&width=150&query=item image"}
+          src={imageUrl || defaultMyItemImg}
           alt={name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
