@@ -23,6 +23,7 @@ interface SetPriceModalProps {
   onConfirm: (itemId: number, price: number) => void
 }
 
+//co,
 export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPriceModalProps) {
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
