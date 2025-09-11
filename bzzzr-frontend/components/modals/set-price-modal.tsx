@@ -11,6 +11,7 @@ import { Badge, type BadgeProps } from "@/components/ui/badge"
 import { useLanguage } from "@/context/language-context"
 
 export type Rarity = "common" | "uncommon" | "rare" | "epic" | "legendary" | "mythic"
+
 interface SetPriceModalProps {
   item: {
     id: number
@@ -23,61 +24,36 @@ interface SetPriceModalProps {
   onConfirm: (itemId: number, price: number) => void
 }
 
-//co,
 export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPriceModalProps) {
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
   const [isConfirming, setIsConfirming] = useState(false)
-
-  const [keyboardHeight, setKeyboardHeight] = useState(0)
+  const [shouldFocusInput, setShouldFocusInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (!isOpen) return
+    if (isOpen) {
+      // Устанавливаем задержку перед фокусом
+      const timer = setTimeout(() => {
+        setShouldFocusInput(true)
+      }, 300) // 300ms задержка
 
-    const handleResize = () => {
-      if (window.visualViewport) {
-        const newKeyboardHeight = window.innerHeight - window.visualViewport.height
-        setKeyboardHeight(newKeyboardHeight)
-      }
-    }
-
-    const handleFocus = () => {
-      setTimeout(() => {
-        handleResize()
-      }, 100)
-    }
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleResize)
-    }
-
-    const timer = setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus()
-        inputRef.current.addEventListener('focus', handleFocus)
-      }
-    }, 300)
-
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', handleResize)
-      }
-      if (inputRef.current) {
-        inputRef.current.removeEventListener('focus', handleFocus)
-      }
-      document.body.style.overflow = ''
-      clearTimeout(timer)
-      setKeyboardHeight(0) // Сбрасываем высоту при закрытии
+      return () => clearTimeout(timer)
+    } else {
+      setShouldFocusInput(false)
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (shouldFocusInput && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [shouldFocusInput])
 
   if (!item) return null
 
   const priceNumber = Number.parseFloat(price) || 0
-  const commissionRate = 0.05
+  const commissionRate = 0.05 // 5% комиссия
   const commission = priceNumber * commissionRate
   const youWillReceive = priceNumber - commission
 
@@ -101,18 +77,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent 
-        className="max-w-sm rounded-xl gradient-bg-modal"
-        style={{
-          // ИСПРАВЛЕНО: Правильное позиционирование
-          position: 'fixed',
-          left: '50%',
-          bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : 'auto',
-          top: keyboardHeight > 0 ? 'auto' : '50%',
-          transform: keyboardHeight > 0 ? 'translateX(-50%)' : 'translate(-50%, -50%)',
-          transition: 'bottom 0.3s ease, transform 0.3s ease'
-        }}
-      >
+      <DialogContent className="max-w-sm rounded-xl gradient-bg-modal">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold text-[var(--text-primary)]">
             {t("setPriceModal.title")}
