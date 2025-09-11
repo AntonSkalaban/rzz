@@ -31,7 +31,7 @@ const types = [
   { name: "Secretbox", floorPrice: 12.1 },
 ]
 
-const rarities = ["common", "uncommon", "rare", "epic", "legendary", "mythic"]
+const rarities = ["common", "rare", "epic", "legendary"]
 
 const mockItemNames = [
   "Believer",

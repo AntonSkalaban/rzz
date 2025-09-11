@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react" // ⬅️ ДОБАВЛЕНО useRef
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,6 +28,55 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
   const [isConfirming, setIsConfirming] = useState(false)
+  const [keyboardHeight, setKeyboardHeight] = useState(0) // ⬅️ ДОБАВЛЕНО состояние для высоты клавиатуры
+  const inputRef = useRef<HTMLInputElement>(null) // ⬅️ ДОБАВЛЕНО ref для input
+
+  // ⬅️ ДОБАВЛЕН useEffect для обработки клавиатуры
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleResize = () => {
+      // Определяем высоту клавиатуры
+      if (window.visualViewport) {
+        const newKeyboardHeight = window.innerHeight - window.visualViewport.height
+        setKeyboardHeight(newKeyboardHeight)
+      }
+    }
+
+    const handleFocus = () => {
+      // При фокусе на input активируем обработку клавиатуры
+      setTimeout(() => {
+        handleResize()
+      }, 100)
+    }
+
+    // Добавляем обработчики
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize)
+    }
+
+    // Фокусируемся на input при открытии модалки
+    const timer = setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus()
+        inputRef.current.addEventListener('focus', handleFocus)
+      }
+    }, 300)
+
+    // Предотвращаем скролл body когда модалка открыта
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize)
+      }
+      if (inputRef.current) {
+        inputRef.current.removeEventListener('focus', handleFocus)
+      }
+      document.body.style.overflow = ''
+      clearTimeout(timer)
+    }
+  }, [isOpen])
 
   if (!item) return null
 
@@ -42,21 +91,32 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
     if (priceNumber <= 0) return
 
     setIsConfirming(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Имитация API запроса
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     onConfirm(item.id, priceNumber)
     setIsConfirming(false)
     setPrice("")
+    setKeyboardHeight(0) // ⬅️ ДОБАВЛЕНО сброс высоты клавиатуры
     onOpenChange(false)
   }
 
   const handleCancel = () => {
     setPrice("")
+    setKeyboardHeight(0) // ⬅️ ДОБАВЛЕНО сброс высоты клавиатуры
     onOpenChange(false)
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-sm rounded-xl gradient-bg-modal">
+      <DialogContent 
+        className="max-w-sm rounded-xl gradient-bg-modal"
+        // ⬅️ ДОБАВЛЕНО динамические стили для позиционирования
+        style={{
+          bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : 'auto',
+          top: keyboardHeight > 0 ? 'auto' : '50%',
+          transform: keyboardHeight > 0 ? 'none' : 'translate(-50%, -50%)',
+          transition: 'bottom 0.3s ease, transform 0.3s ease'
+        }}
+      >
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold text-[var(--text-primary)]">
             {t("setPriceModal.title")}
@@ -92,6 +152,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
             <div className="relative">
               <TonIcon width={16} height={16} className="absolute left-3 top-1/2 -translate-y-1/2" />
               <Input
+                ref={inputRef} // ⬅️ ДОБАВЛЕНО ref
                 id="sale-price"
                 type="number"
                 placeholder="0.00"
