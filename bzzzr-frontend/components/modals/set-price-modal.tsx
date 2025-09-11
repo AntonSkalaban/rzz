@@ -36,7 +36,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
       // Устанавливаем задержку перед фокусом
       const timer = setTimeout(() => {
         setShouldFocusInput(true)
-      }, 300) // 300ms задержка
+      }, 1500) // 300ms задержка
 
       return () => clearTimeout(timer)
     } else {
