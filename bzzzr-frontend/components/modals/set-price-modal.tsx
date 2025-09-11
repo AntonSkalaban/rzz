@@ -11,7 +11,6 @@ import { Badge, type BadgeProps } from "@/components/ui/badge"
 import { useLanguage } from "@/context/language-context"
 
 export type Rarity = "common" | "uncommon" | "rare" | "epic" | "legendary" | "mythic"
-
 interface SetPriceModalProps {
   item: {
     id: number
