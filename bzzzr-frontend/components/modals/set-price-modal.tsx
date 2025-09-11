@@ -27,6 +27,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
   const [isConfirming, setIsConfirming] = useState(false)
+
   const [keyboardHeight, setKeyboardHeight] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -85,7 +86,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
     if (priceNumber <= 0) return
 
     setIsConfirming(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // Имитация API запроса
     onConfirm(item.id, priceNumber)
     setIsConfirming(false)
     setPrice("")
