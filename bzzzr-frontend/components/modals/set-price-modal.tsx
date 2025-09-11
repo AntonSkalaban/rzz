@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,18 +28,27 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
   const [isConfirming, setIsConfirming] = useState(false)
+  const [shouldFocusInput, setShouldFocusInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      // Задержка для корректного отображения клавиатуры на мобильных устройствах
+    if (isOpen) {
+      // Устанавливаем задержку перед фокусом
       const timer = setTimeout(() => {
-        inputRef.current?.focus()
-      }, 300)
-      
+        setShouldFocusInput(true)
+      }, 300) // 300ms задержка
+
       return () => clearTimeout(timer)
+    } else {
+      setShouldFocusInput(false)
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (shouldFocusInput && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [shouldFocusInput])
 
   if (!item) return null
 
