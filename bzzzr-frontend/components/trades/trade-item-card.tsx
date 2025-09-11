@@ -6,6 +6,7 @@ import type { TradeItem } from "@/types/trade";
 import { TonIcon } from "@/components/icons/ton-icon";
 import { useLanguage } from "@/context/language-context";
 import { ItemPriceWithDate, TransactionTypeBadge } from "../ListItem/ListItem";
+import { defaultTradeItemImg } from "@/constants/constants";
 
 interface TradeItemCardProps {
   trade: TradeItem;
@@ -23,9 +24,9 @@ export function TradeItemCard({ trade, className }: TradeItemCardProps) {
       )}
     >
       {trade.itemImage && (
-        <div className="relative w-full w-24 h-24 shrink-0 rounded-lg overflow-hidden border border-[var(--border-primary)]">
+        <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden border border-[var(--border-primary)]">
           <Image
-            src={trade.itemImage || "/placeholder.svg?height=96&width=96&query=trade item"}
+            src={trade.itemImage || defaultTradeItemImg}
             alt={trade.itemName}
             fill
             sizes="33vw"
