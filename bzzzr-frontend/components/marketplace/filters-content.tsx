@@ -46,6 +46,7 @@ const mockItemNames = [
   "Mystic Orb",
 ]
 
+const defaultPriceRange = [0, 999];
 export function FiltersContent() {
   const { t } = useLanguage() // Получаем функцию перевода
 
@@ -54,7 +55,7 @@ export function FiltersContent() {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([])
   const [selectedCollections, setSelectedCollections] = useState<string[]>([])
   const [selectedRarities, setSelectedRarities] = useState<string[]>([])
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 99999])
+  const [priceRange, setPriceRange] = useState<number[]>(defaultPriceRange)
   const [selectedTitles, setSelectedTitles] = useState<string[]>([])
   const [searchTerm, setSearchTerm] = useState("")
 
@@ -294,9 +295,9 @@ export function FiltersContent() {
             </Popover>
             <AccordionContent className="pt-2 pb-0">
               <Slider
-                defaultValue={[0, 99999]}
-                max={99999}
-                step={100}
+                defaultValue={defaultPriceRange}
+                max={defaultPriceRange[1]}
+                step={10}
                 className="my-4"
                 value={priceRange}
                 onValueChange={setPriceRange}
