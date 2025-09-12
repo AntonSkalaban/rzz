@@ -28,27 +28,20 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
   const { t } = useLanguage()
   const [price, setPrice] = useState<string>("")
   const [isConfirming, setIsConfirming] = useState(false)
-  const [shouldFocusInput, setShouldFocusInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (isOpen) {
-      // Устанавливаем задержку перед фокусом
+    if (isOpen && inputRef.current) {
+      // Устанавливаем фокус с задержкой 400ms после открытия модального окна
       const timer = setTimeout(() => {
-        setShouldFocusInput(true)
-      }, 1500) // 300ms задержка
-
+        if (inputRef.current) {
+          inputRef.current.focus()
+        }
+      }, 400)
+      
       return () => clearTimeout(timer)
-    } else {
-      setShouldFocusInput(false)
     }
   }, [isOpen])
-
-  useEffect(() => {
-    if (shouldFocusInput && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [shouldFocusInput])
 
   if (!item) return null
 
@@ -77,7 +70,10 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-sm rounded-xl gradient-bg-modal">
+      <DialogContent 
+        className="max-w-sm rounded-xl gradient-bg-modal" 
+        onOpenAutoFocus={(e) => e.preventDefault()} // Отключаем встроенный автофокус
+      >
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold text-[var(--text-primary)]">
             {t("setPriceModal.title")}
@@ -122,6 +118,7 @@ export function SetPriceModal({ item, isOpen, onOpenChange, onConfirm }: SetPric
                 onChange={(e) => setPrice(e.target.value)}
                 min="0"
                 step="0.01"
+                autoFocus={false} // Явно отключаем автофокус
               />
             </div>
           </div>
