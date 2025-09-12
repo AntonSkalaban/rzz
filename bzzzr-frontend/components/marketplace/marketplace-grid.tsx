@@ -5,6 +5,8 @@ import { ItemDetailModal } from "@/components/modals/item-detail-modal"
 import { useState } from "react"
 import { useCart } from "@/context/cart-context" // Импортируем useCart
 
+
+
 const mockItems = [
   { name: "Believer", rarity: "legendary", id: 2478, price: 53.5, imageUrl: "/placeholder.svg?height=200&width=150" },
   { name: "Pixel Knight", rarity: "epic", id: 1024, price: 25.0, imageUrl: "/placeholder.svg?height=200&width=150" },
@@ -23,6 +25,7 @@ const mockItems = [
 ]
 
 export function MarketplaceGrid() {
+  console.log('MarketplaceGrid RENDRE')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<(typeof mockItems)[0] | null>(null)
   const { addToCart } = useCart() // Получаем функцию addToCart
@@ -48,6 +51,8 @@ export function MarketplaceGrid() {
     })
     setIsModalOpen(false) // Закрываем модалку после добавления в корзину
   }
+
+  console.log('rerender')
 
   return (
     <>
