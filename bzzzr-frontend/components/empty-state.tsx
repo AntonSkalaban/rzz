@@ -34,7 +34,7 @@ export function EmptyState({
         />
       )}
       <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">{title}</h2>
-      <p className="text-[var(--text-secondary)] max-w-md">{description}</p>
+      {description && <p className="text-[var(--text-secondary)] max-w-md">{description}</p>}
     </div>
   )
 }

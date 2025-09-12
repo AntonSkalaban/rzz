@@ -140,13 +140,15 @@ export default function RafflesPage() {
     return filteredRaffles.filter((r) => r.createdByUserId === user?.id)
   }, [filteredRaffles, user?.id])
 
-  const renderRaffleGrid = (items: Raffle[], emptyMessageKey: string) => {
+  const renderRaffleGrid = (items: Raffle[], emptyMessageKey: string, withDescription = false) => {
     if (items.length === 0) {
       return (
         <EmptyState
-          title={t(emptyMessageKey + "Title")}
-          description={t(emptyMessageKey + "Description")}
-          iconSrc="/placeholder.svg?height=120&width=120"
+          title={t(emptyMessageKey)}
+          description={withDescription ? t(emptyMessageKey) : ''}
+          iconWidth={160}
+          iconHeight={160}
+          iconSrc="/images/sad-arab-character.png"
         />
       )
     }
